@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ciranda AEE</title>
+<meta name="theme-color" content="#1f5a66">
+<meta name="description" content="Caderno de trabalho da professora de AEE da Educação Infantil">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ciranda AEE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: caderno de trabalho calmo e acolhedor de uma professora de AEE da Educação Infantil
+   IDEA: a pasta de acompanhamento da criança, com abas coloridas por módulo
+   PICTURE: a ferramenta em uso; o painel do dia com a ciranda de atendimentos no topo
+   COLOUR and TYPE: azul-petróleo, terracota e areia (identidade dos apps do Pedro); Baloo 2 + Nunito
+   LAYOUT: barra lateral no computador, barra inferior no celular, uma coluna calma de conteúdo */
+:root{color-scheme:light dark;
+--bg:light-dark(#f6efe3,#0f1d21);--card:light-dark(#fffdf8,#16292e);--ink:light-dark(#1c2b2f,#ece4d6);
+--mut:light-dark(#5b6a6d,#a7b3b3);--pet:light-dark(#1f5a66,#5fb0bd);--pet2:light-dark(#e3eff0,#1c3a40);
+--ter:light-dark(#b85c38,#e08a62);--ter2:light-dark(#f7e3d8,#3a2419);--are:light-dark(#efe2c9,#2a2a22);
+--line:light-dark(#e2d6c2,#2a4248);--ok:light-dark(#2f7d4f,#6cc596);--warn:light-dark(#a8611d,#e5a25a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Nunito,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Baloo 2",Nunito,sans-serif;line-height:1.1;margin:0 0 .4em;text-wrap:balance}
+h1{font-size:clamp(28px,4vw,40px)}h2{font-size:24px}h3{font-size:19px}
+a{color:var(--pet)}
+.app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+nav{background:var(--pet);color:#fff;padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+nav .brand{font:700 26px "Baloo 2",sans-serif;padding:0 10px 14px;display:flex;align-items:center;gap:10px}
+nav a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:12px;font-weight:600;display:flex;gap:10px;align-items:center;min-height:44px}
+nav a:hover{background:rgba(255,255,255,.12)}nav a.on{background:var(--bg);color:var(--pet)}
+nav svg{width:20px;height:20px;flex:none}
+nav .sig{margin-top:auto;font-size:13px;opacity:.85;padding:10px}nav .sig a{display:inline;padding:0;min-height:0;text-decoration:underline}
+main{padding:max(clamp(18px,3vw,40px),env(safe-area-inset-top)) max(4vw,16px) calc(110px + env(safe-area-inset-bottom));max-width:1100px;width:100%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin-bottom:16px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mut{color:var(--mut)}.small{font-size:14px}
+button,.btn{font:600 16px Nunito,sans-serif;border:0;border-radius:12px;padding:10px 16px;min-height:44px;cursor:pointer;background:var(--pet);color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+button.sec,.btn.sec{background:var(--pet2);color:var(--pet)}button.ter{background:var(--ter);color:#fff}button.ghost{background:transparent;color:var(--pet);border:1px solid var(--line)}
+button.del{background:transparent;color:var(--ter);border:1px solid var(--ter)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--ter);outline-offset:2px}
+label{display:block;font-weight:700;font-size:15px;margin:12px 0 4px}
+input,select,textarea{font:16px Nunito,sans-serif;width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-height:44px}
+textarea{min-height:90px;resize:vertical}
+.f2{display:grid;gap:0 16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.chk{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.chk label{font-weight:600;margin:0;display:flex;gap:6px;align-items:center;background:var(--pet2);padding:8px 12px;border-radius:999px;font-size:14px;cursor:pointer}
+.chk input{width:18px;height:18px;min-height:0}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--pet2);color:var(--pet)}
+.tag.t{background:var(--ter2);color:var(--ter)}.tag.a{background:var(--are);color:var(--ink)}
+.kid{display:flex;gap:14px;align-items:center;cursor:pointer}
+.av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font:700 20px "Baloo 2";color:#fff;flex:none}
+.hero{background:var(--pet);color:#fff;border-radius:22px;padding:22px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:center;margin-bottom:18px}
+.hero h1{color:#fff}.hero .mut{color:#d6ecef}
+.ring{position:relative;aspect-ratio:1;max-width:260px;justify-self:center;width:100%}
+.ring svg{width:100%;height:100%}
+.list{display:flex;flex-direction:column;gap:10px}
+.item{border-left:5px solid var(--pet);background:var(--card);border-radius:12px;padding:12px 14px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.item.t{border-left-color:var(--ter)}.item.w{border-left-color:var(--warn)}
+.time{font:700 22px "Baloo 2";color:var(--ter);white-space:nowrap;min-width:64px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:4px 0 14px;padding-bottom:4px}.tabs button{flex:none}
+.seg{display:flex;flex-wrap:wrap;gap:4px}.seg label{margin:0;font-size:13px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid var(--line);cursor:pointer;display:flex;align-items:center;gap:4px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px;min-height:0}.seg input:checked+span{color:#fff}
+.seg label:has(input:checked){background:var(--pet);border-color:var(--pet);color:#fff}.seg label.d:has(input:checked){background:var(--warn);border-color:var(--warn)}.seg label.n:has(input:checked){background:var(--ter);border-color:var(--ter)}
+.seg input:focus-visible+span{outline:3px solid var(--ter);outline-offset:3px}
+.mk{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 14px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+@media(max-width:600px){.mk{grid-template-columns:minmax(0,1fr)}}
+.out{white-space:pre-wrap;background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:14px;font-size:15px}
+.lei{border-top:1px solid var(--line);padding:12px 0}.lei:first-of-type{border-top:0}
+.lei b{display:block}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:12px;font-weight:700;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+.lock{position:fixed;inset:0;background:var(--pet);display:grid;place-items:center;z-index:10;padding:20px}
+.lock .card{max-width:340px;width:100%;text-align:center}
+.warnb{background:var(--ter2);color:var(--ter);border-radius:12px;padding:10px 14px;font-weight:600;margin-bottom:14px}
+.steps{counter-reset:s}.steps h3{counter-increment:s}.steps h3::before{content:"Etapa " counter(s) ". ";color:var(--ter)}
+details summary{cursor:pointer;font-weight:700;padding:6px 0}
+@media(max-width:820px){.app{grid-template-columns:minmax(0,1fr)}
+nav{position:fixed;bottom:0;top:auto;left:0;right:0;height:auto;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:5;overflow-x:auto;gap:2px}
+nav .brand,nav .sig{display:none}nav a{flex-direction:column;gap:2px;font-size:11px;padding:6px 8px;flex:none;min-width:62px}
+.hero{grid-template-columns:minmax(0,1fr)}.ring{max-width:200px}}
+@media(prefers-reduced-motion:no-preference){.ring .dot{transition:transform .6s}.ring:hover .spin{transform:rotate(20deg);transform-origin:50% 50%;transition:transform .8s}}
+@media print{nav,.noprint{display:none}.app{display:block}}
+</style>
+</head>
+<body>
+<div class="app">
+<nav id="nav"></nav>
+<main id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+<div id="lockwrap"></div>
+<script>
+{
+const KEY='ciranda-aee-v1';
+const MOM=['Chegada e acolhida','Roda de conversa','Alimentação','Higiene e troca','Descanso e sono','Parque e área externa','Propostas e brincadeiras dirigidas','Despedida e saída'];
+const CAMPOS=['O eu, o outro e o nós','Corpo, gestos e movimentos','Traços, sons, cores e formas','Escuta, fala, pensamento e imaginação','Espaços, tempos, quantidades, relações e transformações'];
+const REC=['Prancha de comunicação (CAA)','Rotina visual com fotos ou pictogramas','Antecipação das mudanças de atividade','Abafador ou redução de ruído','Cantinho de acalmar','Materiais sensoriais','Engrossadores e adaptação de pega','Mobiliário adaptado ou posicionamento','Brinquedos adaptados','Histórias com apoio concreto','Recursos táteis ou ampliados','Pistas gestuais e Libras','Tempo estendido nas transições','Apoio do PAE em momentos definidos'];
+const AGR=['Berçário','1 ano','2 anos','3 anos','4 anos','5 anos'];
+const PUB=['Deficiência','TEA','Altas habilidades ou superdotação','Em observação (sem laudo)'];
+const TIPOS=['Atendimento individual na sala de recursos','Atendimento colaborativo na turma','Orientação à professora referência','Orientação ao PAE','Atendimento ou contato com a família','Articulação intersetorial (saúde, CRAS, terapias)','Observação da rotina'];
+const FAIXAS=[['bebes','Bebês','0 a 1 ano e 6 meses'],['bp','Crianças bem pequenas','1 ano e 7 meses a 3 anos e 11 meses'],['pq','Crianças pequenas','4 anos a 5 anos e 11 meses']];
+const MARCOS={bebes:[['sorriso e interação com adultos conhecidos','reconhecimento das pessoas de referência','aceitação do contato com outros adultos da EMEI','interesse pelas outras crianças'],['sustentação da cabeça e do tronco','deslocamento rolando, arrastando-se ou engatinhando','pegar e soltar objetos com intenção','exploração de objetos com as mãos e a boca'],['reação a músicas e sons do ambiente','exploração de materiais de diferentes texturas','produção de sons com objetos e com o próprio corpo'],['resposta ao ouvir o próprio nome','balbucio e vocalização para se comunicar','uso de gestos e do apontar para pedir','atenção a histórias e cantigas'],['busca de objetos escondidos','exploração do espaço da sala','antecipação dos momentos da rotina']],
+bp:[['brincar ao lado de outras crianças','compartilhar brinquedos com mediação','separação tranquila da família na chegada','seguir combinados simples da rotina','aceitar ajuda para se acalmar'],['marcha com segurança e subida de pequenos obstáculos','correr, pular e chutar bola','uso da colher para se alimentar','participação na troca e na higiene','movimento de pinça'],['rabiscos com giz e lápis','exploração de tinta, massinha e outros materiais','gestos acompanhando músicas','reconhecimento de cores no dia a dia'],['uso de palavras ou sinais para se comunicar','combinação de duas ou mais palavras','nomeação de objetos e pessoas conhecidas','escuta de histórias curtas até o fim','compreensão de comandos simples'],['encaixar e empilhar peças','separar objetos por cor ou forma','reconhecimento da sequência da rotina','noções de dentro e fora, em cima e embaixo']],
+pq:[['brincadeiras de faz de conta com outras crianças','esperar a vez em jogos e conversas','resolução de pequenos conflitos com ajuda do adulto','reconhecer e nomear as próprias emoções','autonomia no autocuidado'],['equilíbrio, saltos e corrida com coordenação','uso da tesoura','preensão adequada do lápis','vestir e calçar peças simples'],['desenho da figura humana','criação com diferentes materiais e cores','cantar e acompanhar ritmos','participação em dramatizações'],['relato de fatos em sequência','reconto de histórias conhecidas','reconhecimento do próprio nome escrito','tentativas de escrita do próprio nome','expressão de ideias nas rodas de conversa'],['contagem de objetos até 10','comparação de quantidades','reconhecimento de formas geométricas simples','observação de transformações','noções de tempo (antes, depois, ontem, amanhã)']]};
+const BARR=['comunicação oral','interação social','regulação emocional e sensorial','transições da rotina','locomoção e acessibilidade física','alimentação','higiene e autocuidado','participação nas propostas coletivas','atenção e permanência nas brincadeiras'];
+const ST=[['a','Adquirido'],['d','Em desenvolvimento'],['n','Ainda não observado']];
+const DIAS=['Segunda','Terça','Quarta','Quinta','Sexta'];
+const CORES=['#1f5a66','#b85c38','#7a6a2f','#3f7d6a','#8a4f6d','#4a6aa0'];
+let S,storeOk=true,dl=null;
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);
+const hoje=()=>new Date().toISOString().slice(0,10);
+const fmt=d=>d?d.split('-').reverse().join('/'):'';
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2200)}
+function exemplo(){const a=uid(),b=uid();return{cfg:{prof:'',emei:'',regional:'',pin:''},
+kids:[{id:a,ex:true,nome:'Criança Exemplo 1',nasc:'2022-03-14',agr:'4 anos',turma:'4 anos B',turno:'Manhã',refp:'Professora referência da turma',resp:'Mãe',tel:'31999990000',pae:'Sim',pub:['TEA'],saude:'Família informa acompanhamento com fonoaudiologia.',interesses:'Dinossauros, músicas com gestos, blocos de encaixe.',horarios:[{dia:'Terça',hora:'09:30',modo:'Colaborativo na turma'},{dia:'Quinta',hora:'14:00',modo:'Sala de recursos'}],
+estudo:{data:'2026-03-10',fam:true,e1:'Dificuldade para permanecer na roda e nas transições entre atividades.',m:{'Roda de conversa':'Sai da roda após poucos minutos.','Alimentação':'Seletividade alimentar relatada pela família.'},e3p:'Memoriza canções, reconhece fotos dos colegas, gosta de encaixes.',e3n:'Antecipação da rotina e apoio nas transições.',e4:'Rotina visual na parede da sala e cartão de mudança de atividade.',rec:['Rotina visual com fotos ou pictogramas','Antecipação das mudanças de atividade','Abafador ou redução de ruído']},
+paee:{data:'2026-03-20',rev:'2026-06-20',obj:{'O eu, o outro e o nós':'Participar da roda por mais tempo com apoio de objeto de interesse.','Escuta, fala, pensamento e imaginação':'Usar prancha com 6 pictogramas para fazer escolhas.'},rec:['Rotina visual com fotos ou pictogramas','Prancha de comunicação (CAA)'],freq:'2 vezes por semana',dur:'40 minutos',local:'Sala de recursos e na turma',oprof:'Antecipar com o cartão de mudança 2 minutos antes de cada transição.',opae:'Oferecer o abafador no parque quando houver muito barulho.',ofam:'Usar as mesmas fotos da rotina em casa.',inter:''},rel:{faixa:'bp',marcos:{bp0_0:'a',bp0_1:'d',bp0_3:'d',bp3_0:'d',bp3_2:'a',bp3_3:'n',bp4_0:'a',bp4_2:'d'},barr:['comunicação oral','transições da rotina'],rec:['Rotina visual com fotos ou pictogramas','Prancha de comunicação (CAA)'],cons:''}},
+{id:b,ex:true,nome:'Criança Exemplo 2',nasc:'2023-08-02',agr:'3 anos',turma:'3 anos A',turno:'Integral',refp:'Professora referência da turma',resp:'Avó',tel:'',pae:'Não',pub:['Em observação (sem laudo)'],saude:'',interesses:'Água, bolhas de sabão.',horarios:[{dia:'Segunda',hora:'10:00',modo:'Observação da rotina'}],estudo:null,paee:null}],
+regs:[{id:uid(),kid:a,ex:true,data:'2026-11-18',tipo:'Atendimento colaborativo na turma',pres:'Presente',prop:'Roda com a rotina visual e música de chegada.',resp:'Permaneceu na roda por cerca de 8 minutos e apontou a foto do parque.',prox:'Introduzir a escolha entre duas músicas na prancha.'},
+{id:uid(),kid:a,ex:true,data:'2026-11-20',tipo:'Atendimento individual na sala de recursos',pres:'Presente',prop:'Encaixes com pictogramas de cores.',resp:'Nomeou três cores com apoio da prancha.',prox:'Levar a prancha para o momento do lanche.'}]}}
+function load(){try{const r=localStorage.getItem(KEY);S=r?JSON.parse(r):exemplo()}catch(e){storeOk=false;S=exemplo()}
+S.cfg=S.cfg||{};S.kids=S.kids||[];S.regs=S.regs||[]}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));storeOk=true}catch(e){storeOk=false}}
+const kidBy=id=>S.kids.find(k=>k.id===id);
+function idade(n){if(!n)return'';const d=new Date(n+'T12:00'),t=new Date();let m=(t.getFullYear()-d.getFullYear())*12+t.getMonth()-d.getMonth();if(t.getDate()<d.getDate())m--;if(m<0)return'';const a=Math.floor(m/12),r=m%12;return(a?a+(a>1?' anos':' ano'):'')+(a&&r?' e ':'')+(r?r+(r>1?' meses':' mês'):'')||'recém-nascida'}
+const ini=n=>(n||'?').trim().split(/\s+/).map(p=>p[0]).slice(0,2).join('').toUpperCase();
+const cor=id=>CORES[[...id].reduce((s,c)=>s+c.charCodeAt(0),0)%CORES.length];
+const primeiro=n=>(n||'').trim().split(/\s+/)[0]||'a criança';
+const lc=t=>String(t||'').trim().replace(/\.$/,'').replace(/^./,c=>c.toLowerCase());
+function faixaDe(k){let m=null;if(k.nasc){const d=new Date(k.nasc+'T12:00'),t=new Date();m=(t.getFullYear()-d.getFullYear())*12+t.getMonth()-d.getMonth()}
+if(m==null){const i=AGR.indexOf(k.agr);m=i<0?48:[6,12,24,36,48,60][i]}return m<=18?'bebes':m<48?'bp':'pq'}
+const juntar=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' e '+a[a.length-1];
+const dias=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
+function pend(){const p=[];S.kids.forEach(k=>{
+if(!k.estudo)p.push({k,t:'Estudo de caso ainda não registrado',go:'estudo'});
+else if(!k.paee)p.push({k,t:'PAEE/PEI ainda não elaborado a partir do estudo de caso',go:'paee'});
+else if(k.paee.rev&&k.paee.rev<=hoje())p.push({k,t:'PAEE/PEI com revisão prevista para '+fmt(k.paee.rev),go:'paee'});
+const r=S.regs.filter(x=>x.kid===k.id).map(x=>x.data).sort().pop();
+if(!r||dias(r,hoje())>14)p.push({k,t:r?'Sem registro há '+dias(r,hoje())+' dias':'Nenhum registro de atendimento',go:'reg',w:1});
+const f=S.regs.filter(x=>x.kid===k.id&&x.pres==='Faltou').slice(-3);if(f.length>=2)p.push({k,t:f.length+' faltas recentes no AEE',go:'assist',w:1})});return p}
+const ICO={hoje:'<path d="M12 3v2M12 19v2M3 12h2M19 12h2M6 6l1.4 1.4M16.6 16.6L18 18M6 18l1.4-1.4M16.6 7.4L18 6"/><circle cx="12" cy="12" r="4"/>',criancas:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 20c.3-2.5 1.6-4.4 4-4.6 1.4.3 2.5 1.6 2.5 4.6"/>',registros:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',assistente:'<path d="M12 3l2.2 4.6 5 .7-3.6 3.5.9 5L12 14.4 7.5 16.8l.9-5L4.8 8.3l5-.7z"/>',relatorios:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>',legislacao:'<path d="M12 4v16M5 8h14M7 8l-3 6a3 3 0 006 0zM17 8l-3 6a3 3 0 006 0z"/>',ajustes:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>'};
+const VIEWS=[['hoje','Hoje'],['criancas','Crianças'],['registros','Registros'],['assistente','Assistente'],['relatorios','Relatórios'],['legislacao','Legislação'],['ajustes','Ajustes']];
+let cur={v:'hoje',kid:null,tab:'ficha',sit:null,rel:null};
+function navR(){$('#nav').innerHTML='<div class="brand"><svg viewBox="0 0 40 40" width="34" height="34"><g fill="none" stroke="#fff" stroke-width="3"><circle cx="20" cy="20" r="14"/></g><g fill="#f0a27f"><circle cx="20" cy="6" r="4"/><circle cx="32" cy="27" r="4"/><circle cx="8" cy="27" r="4"/></g></svg>Ciranda AEE</div>'+
+VIEWS.map(([k,l])=>'<a href="#'+k+'" class="'+(cur.v===k?'on':'')+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+ICO[k]+'</svg>'+l+'</a>').join('')+
+'<div class="sig">Desenvolvido por <a href="https://www.instagram.com/pedror_motta/">Pedro Motta</a></div>'}
+function go(v,o){Object.assign(cur,{v},o||{});if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);render()}
+function render(){navR();const f={hoje:vHoje,criancas:vKids,registros:vRegs,assistente:vAssist,relatorios:vRel,legislacao:vLei,ajustes:vCfg}[cur.v]||vHoje;
+$('#main').innerHTML=(storeOk?'':'<div class="warnb">Este navegador não está guardando os dados. Use Ajustes, Fazer backup antes de fechar.</div>')+f();window.scrollTo(0,0)}
+function kidOpts(sel){return S.kids.map(k=>'<option value="'+esc(k.id)+'"'+(k.id===sel?' selected':'')+'>'+esc(k.nome)+'</option>').join('')}
+function exNote(){return S.kids.some(k=>k.ex)?'<p class="small mut">Os registros marcados como exemplo são fictícios. Remova em Ajustes quando começar a usar.</p>':''}
+/* HOJE */
+function vHoje(){const dn=new Date().getDay(),dia=DIAS[dn-1];const at=[];S.kids.forEach(k=>(k.horarios||[]).forEach(h=>{if(h.dia===dia)at.push({k,h})}));at.sort((a,b)=>a.h.hora.localeCompare(b.h.hora));
+const p=pend(),n=S.kids.length,R=40,pts=S.kids.slice(0,12).map((k,i,a)=>{const ang=i/a.length*Math.PI*2-Math.PI/2;return'<g class="dot"><circle cx="'+(60+R*Math.cos(ang)).toFixed(1)+'" cy="'+(60+R*Math.sin(ang)).toFixed(1)+'" r="9" fill="'+cor(k.id)+'" stroke="#fff" stroke-width="2"/><text x="'+(60+R*Math.cos(ang)).toFixed(1)+'" y="'+(63.5+R*Math.sin(ang)).toFixed(1)+'" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">'+esc(ini(k.nome))+'</text></g>'}).join('');
+const nome=S.cfg.prof?', '+esc(primeiro(S.cfg.prof)):'';
+return'<section class="hero"><div><p class="mut" style="margin:0">'+new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'})+'</p><h1>'+(new Date().getHours()<12?'Bom dia':new Date().getHours()<18?'Boa tarde':'Boa noite')+nome+'.</h1><p>'+(at.length?'Você tem '+at.length+(at.length>1?' atendimentos':' atendimento')+' hoje':'Nenhum atendimento marcado para hoje')+' e '+p.length+(p.length===1?' pendência':' pendências')+' no acompanhamento de '+n+(n===1?' criança.':' crianças.')+'</p><div class="row"><button class="ter" data-act="novoReg">Registrar atendimento</button><button class="sec" data-act="go" data-v="assistente">Analisar um caso</button></div></div>'+
+'<div class="ring"><svg viewBox="0 0 120 120" role="img" aria-label="Crianças acompanhadas"><g class="spin"><circle cx="60" cy="60" r="'+R+'" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="3 5"/>'+pts+'</g><text x="60" y="60" text-anchor="middle" font-size="22" font-weight="700" fill="#fff" font-family="Baloo 2">'+n+'</text><text x="60" y="72" text-anchor="middle" font-size="7" fill="#d6ecef">na ciranda</text></svg></div></section>'+
+(instEv?'<div class="card row" style="justify-content:space-between"><span><b>Instale o Ciranda AEE</b><br><span class="small mut">Ícone na tela inicial e uso sem internet.</span></span><button data-act="instalar">Instalar</button></div>':'')+'<div class="grid"><div class="card"><h2>Atendimentos de hoje</h2><div class="list">'+(at.length?at.map(({k,h})=>'<div class="item row" data-act="openKid" data-id="'+esc(k.id)+'" style="cursor:pointer"><span class="time">'+esc(h.hora)+'</span><span><b>'+esc(k.nome)+'</b><br><span class="small mut">'+esc(h.modo)+' · '+esc(k.turma||k.agr)+'</span></span></div>').join(''):'<p class="mut">Os horários fixos de cada criança aparecem aqui. Cadastre na ficha da criança, em Horários do AEE.</p>')+'</div></div>'+
+'<div class="card"><h2>Pendências</h2><div class="list">'+(p.length?p.slice(0,8).map(x=>'<div class="item '+(x.w?'w':'t')+'" data-act="pend" data-id="'+esc(x.k.id)+'" data-go="'+x.go+'" style="cursor:pointer"><b>'+esc(x.k.nome)+'</b><br><span class="small">'+esc(x.t)+'</span></div>').join(''):'<p class="mut">Tudo em dia.</p>')+'</div></div></div>'+exNote()}
+/* CRIANCAS */
+function vKids(){if(cur.kid&&kidBy(cur.kid))return vKid(kidBy(cur.kid));
+return'<div class="row" style="justify-content:space-between"><h1>Crianças</h1><button data-act="novaKid">Nova criança</button></div><input id="busca" placeholder="Buscar pelo nome ou turma" aria-label="Buscar"><div class="grid" id="klist" style="margin-top:14px">'+kidCards('')+'</div>'+exNote()}
+function kidCards(q){q=q.toLowerCase();const l=S.kids.filter(k=>(k.nome+' '+(k.turma||'')).toLowerCase().includes(q));
+return l.length?l.map(k=>'<div class="card kid" data-act="openKid" data-id="'+esc(k.id)+'"><div class="av" style="background:'+cor(k.id)+'">'+esc(ini(k.nome))+'</div><div><b>'+esc(k.nome)+'</b><div class="small mut">'+esc(idade(k.nasc))+' · '+esc(k.turma||k.agr||'')+' · '+esc(k.turno||'')+'</div><div class="row" style="gap:4px;margin-top:4px">'+(k.pub||[]).map(p=>'<span class="tag'+(p.startsWith('Em')?' a':'')+'">'+esc(p)+'</span>').join('')+(k.paee?'':'<span class="tag t">sem PAEE</span>')+'</div></div></div>').join(''):'<p class="mut">Nenhuma criança encontrada.</p>'}
+function vKid(k){const T=[['ficha','Ficha'],['estudo','Estudo de caso'],['paee','PAEE/PEI'],['hist','Histórico']];
+return'<button class="ghost noprint" data-act="voltar">Voltar para a lista</button><div class="row" style="margin:14px 0"><div class="av" style="background:'+cor(k.id)+'">'+esc(ini(k.nome))+'</div><div><h1 style="margin:0">'+esc(k.nome)+'</h1><span class="mut">'+esc(idade(k.nasc))+' · '+esc(k.turma||k.agr||'')+'</span></div></div>'+
+'<div class="tabs noprint">'+T.map(([t,l])=>'<button class="'+(cur.tab===t?'':'sec')+'" data-act="tab" data-t="'+t+'">'+l+'</button>').join('')+'</div>'+({ficha:fFicha,estudo:fEstudo,paee:fPaee,hist:fHist}[cur.tab]||fFicha)(k)}
+const inp=(n,l,v,t)=>'<div><label for="f_'+n+'">'+l+'</label><input id="f_'+n+'" name="'+n+'" type="'+(t||'text')+'" value="'+esc(v)+'"></div>';
+const sel=(n,l,v,o)=>'<div><label for="f_'+n+'">'+l+'</label><select id="f_'+n+'" name="'+n+'"><option value=""></option>'+o.map(x=>'<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select></div>';
+const ta=(n,l,v,h)=>'<div><label for="f_'+n+'">'+l+'</label>'+(h?'<div class="small mut">'+h+'</div>':'')+'<textarea id="f_'+n+'" name="'+n+'">'+esc(v)+'</textarea></div>';
+const chks=(n,o,v)=>'<div class="chk">'+o.map(x=>'<label><input type="checkbox" name="'+n+'" value="'+esc(x)+'"'+((v||[]).includes(x)?' checked':'')+'>'+esc(x)+'</label>').join('')+'</div>';
+function fFicha(k){const h=k.horarios||[];return'<form class="card" id="fk"><h2>Ficha da criança</h2><div class="f2">'+inp('nome','Nome completo',k.nome)+inp('nasc','Data de nascimento',k.nasc,'date')+sel('agr','Agrupamento',k.agr,AGR)+inp('turma','Turma',k.turma)+sel('turno','Turno na EMEI',k.turno,['Manhã','Tarde','Integral'])+inp('refp','Professora referência',k.refp)+inp('resp','Responsável (parentesco ou nome)',k.resp)+inp('tel','WhatsApp do responsável (com DDD)',k.tel,'tel')+sel('pae','Tem Profissional de Apoio Escolar (PAE)?',k.pae,['Sim','Não','Em avaliação'])+'</div>'+
+'<label>Público do AEE</label><div class="small mut">O laudo não é exigido para o AEE. Use "Em observação" enquanto o estudo de caso estiver em andamento.</div>'+chks('pub',PUB,k.pub)+
+ta('interesses','Interesses e o que a criança gosta',k.interesses)+ta('saude','Informações de saúde e terapias que a família autorizou registrar',k.saude,'Registre só o necessário para o trabalho pedagógico (LGPD).')+
+'<h3 style="margin-top:18px">Horários do AEE</h3><div id="hrs">'+h.map((x,i)=>hrRow(x,i)).join('')+'</div><button type="button" class="sec" data-act="addHr">Adicionar horário</button>'+
+'<div class="row" style="margin-top:18px"><button>Salvar ficha</button><button type="button" class="del" data-act="delKid" data-id="'+esc(k.id)+'">Excluir criança</button></div></form>'}
+function hrRow(x,i){return'<div class="f2 hr" style="align-items:end">'+sel('hd'+i,'Dia',x.dia,DIAS)+inp('hh'+i,'Hora',x.hora,'time')+sel('hm'+i,'Modalidade',x.modo,['Sala de recursos','Colaborativo na turma','Observação da rotina','Atendimento à família'])+'</div>'}
+function fEstudo(k){const e=k.estudo||{m:{}};return'<form class="card steps" id="fe"><h2 style="counter-increment:none">Estudo de caso</h2><p class="small mut">Segue as quatro etapas do art. 11 do Decreto nº 12.686/2025. A família participa do processo e o resultado fundamenta o PAEE/PEI.</p><div class="f2">'+inp('data','Data',e.data||hoje(),'date')+'</div><div class="chk"><label><input type="checkbox" name="fam" value="1"'+(e.fam?' checked':'')+'>A família participou do estudo de caso</label></div>'+
+'<h3>Identificação inicial das demandas e barreiras</h3>'+ta('e1','O que trouxe a criança ao AEE? Quem observou e o quê?',e.e1)+
+'<h3>Análise das barreiras no contexto da EMEI</h3><p class="small mut">Descreva o que acontece em cada momento da rotina. Deixe em branco o que não se aplica.</p>'+MOM.map((m,i)=>'<details'+(e.m&&e.m[m]?' open':'')+'><summary>'+m+'</summary><textarea name="m'+i+'" aria-label="'+m+'">'+esc(e.m&&e.m[m])+'</textarea></details>').join('')+
+'<h3>Potencialidades e necessidades de apoio</h3>'+ta('e3p','Potencialidades: o que a criança já faz, gosta e consegue',e.e3p)+ta('e3n','Necessidades de apoio',e.e3n)+
+'<h3>Estratégias e recursos de acessibilidade</h3>'+ta('e4','Estratégias definidas',e.e4)+chks('rec',REC,e.rec)+
+'<div class="row" style="margin-top:18px"><button>Salvar estudo de caso</button>'+(k.estudo?'<button type="button" class="ter" data-act="tab" data-t="paee">Ir para o PAEE/PEI</button>':'')+'</div></form>'}
+function fPaee(k){if(!k.estudo)return'<div class="card"><h2>PAEE/PEI</h2><p>O PAEE e o PEI derivam do estudo de caso. Registre o estudo de caso primeiro.</p><button data-act="tab" data-t="estudo">Fazer o estudo de caso</button></div>';
+const p=k.paee||{obj:{},rec:k.estudo.rec||[],data:hoje()};const rv=p.rev||'';
+return'<form class="card" id="fp"><h2>PAEE/PEI</h2><p class="small mut">Documento pedagógico individual, de atualização contínua, que orienta o trabalho na turma, no AEE e com a família (art. 12 do Decreto nº 12.686/2025).</p><div class="f2">'+inp('data','Data de elaboração',p.data,'date')+inp('rev','Próxima revisão',rv,'date')+inp('freq','Frequência do AEE',p.freq)+inp('dur','Duração de cada atendimento',p.dur)+inp('local','Onde acontece',p.local)+'</div>'+
+'<h3 style="margin-top:16px">Objetivos por campo de experiência (BNCC)</h3>'+CAMPOS.map((c,i)=>'<details'+(p.obj&&p.obj[c]?' open':'')+'><summary>'+c+'</summary><textarea name="o'+i+'" aria-label="'+c+'">'+esc(p.obj&&p.obj[c])+'</textarea></details>').join('')+
+'<h3 style="margin-top:16px">Recursos de acessibilidade</h3>'+chks('rec',REC,p.rec)+
+ta('oprof','Orientações à professora referência',p.oprof)+ta('opae','Orientações ao PAE',p.opae)+ta('ofam','Orientações e combinados com a família',p.ofam)+ta('inter','Articulação intersetorial (saúde, assistência social, terapias)',p.inter)+
+'<div class="row" style="margin-top:18px"><button>Salvar PAEE/PEI</button><button type="button" class="sec" data-act="docPaee">Gerar documento</button></div></form><div id="docout"></div>'}
+function fHist(k){const r=S.regs.filter(x=>x.kid===k.id).sort((a,b)=>b.data.localeCompare(a.data));
+return'<div class="row" style="justify-content:space-between"><h2>Histórico</h2><button data-act="novoReg" data-id="'+esc(k.id)+'">Novo registro</button></div><div class="list">'+(r.length?r.map(regItem).join(''):'<p class="mut">Ainda não há registros.</p>')+'</div>'}
+function regItem(x){const k=kidBy(x.kid);return'<div class="item'+(x.pres==='Faltou'?' t':'')+'"><div class="row" style="justify-content:space-between"><b>'+fmt(x.data)+' · '+esc(x.tipo)+'</b><span class="tag'+(x.pres==='Faltou'?' t':'')+'">'+esc(x.pres)+'</span></div>'+(cur.v==='registros'&&k?'<div class="small mut">'+esc(k.nome)+'</div>':'')+(x.prop?'<p style="margin:6px 0 0"><b>Proposta:</b> '+esc(x.prop)+'</p>':'')+(x.resp?'<p style="margin:4px 0 0"><b>Como a criança respondeu:</b> '+esc(x.resp)+'</p>':'')+(x.prox?'<p style="margin:4px 0 0"><b>Próximos passos:</b> '+esc(x.prox)+'</p>':'')+'<button class="ghost small" style="margin-top:6px" data-act="delReg" data-id="'+esc(x.id)+'">Excluir</button></div>'}
+/* REGISTROS */
+function vRegs(){const r=[...S.regs].sort((a,b)=>b.data.localeCompare(a.data));
+return'<h1>Registros</h1><form class="card" id="fr"><h2>Novo registro</h2><div class="f2"><div><label for="f_kid">Criança</label><select id="f_kid" name="kid" required>'+kidOpts(cur.kid)+'</select></div>'+inp('data','Data',hoje(),'date')+sel('tipo','Tipo',TIPOS[0],TIPOS)+sel('pres','Presença',['Presente'],['Presente','Faltou','Não se aplica'])+'</div>'+ta('prop','O que foi proposto','')+ta('resp','Como a criança respondeu (o que fez, comunicou, precisou)','')+ta('prox','Próximos passos','')+'<button style="margin-top:14px">Salvar registro</button></form><h2>Últimos registros</h2><div class="list">'+(r.slice(0,30).map(regItem).join('')||'<p class="mut">Nada registrado ainda.</p>')+'</div>'}
+/* ASSISTENTE */
+const SIT=[
+{id:'falta',t:'A criança está faltando ao AEE',base:'O AEE complementa a escolarização e não a substitui (art. 8º do Decreto nº 12.686/2025). A Política prevê integração com a rede de proteção social (art. 6º).',
+an:(k,c)=>{const f=S.regs.filter(x=>x.kid===k.id&&x.pres==='Faltou').length;return[f+' falta(s) registrada(s) no AEE até agora.',k.turno==='Integral'?'A criança é do integral: avalie trocar o atendimento para o formato colaborativo na própria turma, evitando retirá-la da rotina.':'Se o atendimento é no contraturno, confirme com a família se há dificuldade de transporte ou de horário.',f>=3?'Com três faltas ou mais, converse com a coordenação da EMEI sobre acionar a rede de proteção, se houver outros sinais de vulnerabilidade.':'Ainda cabe um contato acolhedor antes de qualquer encaminhamento.']},
+enc:f=>f>=3?'Convocar a família para conversa presencial':'Comunicar a família e combinar um novo horário',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Aqui é '+(c.prof||'a professora do AEE')+', da '+(c.emei||'EMEI')+'. Percebi que '+primeiro(k.nome)+' não veio aos últimos atendimentos do AEE. Está tudo bem? Se o horário estiver difícil, podemos combinar outro dia ou fazer o atendimento junto com a turma. Fico no aguardo.'},
+{id:'crise',t:'Desregulação ou crise na rotina',base:'O estudo de caso deve analisar as barreiras no contexto escolar e definir estratégias (art. 11). O PAE atua em conformidade com o PAEE/PEI (art. 14).',
+an:k=>{const e=k.estudo;return[e?'Releia as barreiras registradas no estudo de caso e veja se a crise ocorreu num momento já mapeado.':'A criança ainda não tem estudo de caso: esta situação é um bom ponto de partida para iniciá-lo.','Registre o antes, o durante e o depois: o que aconteceu antes, como a criança reagiu e o que ajudou a acalmar.',k.pae==='Sim'?'Combine com o PAE e com a professora referência uma resposta única para as próximas vezes.':'Se as crises se repetem e comprometem a participação, o estudo de caso pode indicar a necessidade de PAE (sem exigência de laudo, art. 14, § 2º).','Comunique a família no mesmo dia, sem tom de queixa, focando no que ajudou.']},
+enc:()=>'Comunicar a família no mesmo dia e revisar o PAEE/PEI',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Aqui é '+(c.prof||'a professora do AEE')+', da '+(c.emei||'EMEI')+'. Hoje '+primeiro(k.nome)+' teve um momento difícil durante a rotina. Ficamos com ela/ele, acolhemos e aos poucos se acalmou. Queria saber se em casa vocês perceberam algo diferente nos últimos dias, como sono, alimentação ou mudanças na rotina. Isso nos ajuda a planejar. Obrigada.'},
+{id:'familia',t:'A família não comparece ou não retorna',base:'A família e a criança participam de todo o estudo de caso e do acompanhamento do plano (art. 11, § 3º; art. 7º).',
+an:k=>['Verifique se o número de contato está correto e se a família recebe e lê mensagens.','Ofereça horários alternativos, inclusive na entrada ou na saída da criança.','Registre cada tentativa de contato em Registros, tipo "Atendimento ou contato com a família".','Se persistir e houver outros sinais de vulnerabilidade, leve à coordenação da EMEI.'],
+enc:()=>'Convocar a família com horário flexível',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Aqui é '+(c.prof||'a professora do AEE')+', da '+(c.emei||'EMEI')+'. Gostaria de conversar com vocês sobre o acompanhamento de '+primeiro(k.nome)+' no AEE. A conversa é rápida e pode ser na entrada, na saída ou no horário que for melhor para vocês. Qual dia fica bom?'},
+{id:'prof',t:'A professora referência pede apoio ou adaptação',base:'O PAEE/PEI orienta o trabalho na sala comum e as atividades colaborativas (art. 12, § 2º). Cabe ao AEE orientar professores sobre recursos e acompanhar seu uso na turma (Resolução CNE/CEB nº 4/2009, art. 13).',
+an:k=>{const p=k.paee;return[p?'Leve à professora as orientações já escritas no PAEE/PEI e combine qual será testada primeiro.':'Sem PAEE/PEI, comece por uma observação da rotina na turma.','Prefira uma estratégia por vez, ligada a um momento da rotina (ex.: roda, lanche).','Ofereça modelar a estratégia junto com ela no atendimento colaborativo.',p&&p.rec&&p.rec.length?'Recursos já previstos: '+p.rec.join(', ')+'.':'Defina recursos no PAEE/PEI.']},
+enc:()=>'Orientar a professora e agendar atendimento colaborativo',
+msg:(k,c)=>'Oi! Aqui é '+(c.prof||'a professora do AEE')+'. Sobre '+primeiro(k.nome)+': '+((k.paee&&k.paee.oprof)||'podemos combinar uma estratégia para a rotina da turma.')+' Posso ir à sala na próxima semana para fazermos juntas?',dest:'prof'},
+{id:'pae',t:'Avaliar se a criança precisa de PAE',base:'A oferta do profissional de apoio é avaliada pelo estudo de caso e não exige laudo (art. 14, § 2º). Na RME-BH, a decisão é da escola, em diálogo com a família, com base em avaliação pedagógica, e a forma de atendimento segue a Nota Técnica DEID/SMED nº 40/2024.',
+an:k=>['Use o estudo de caso para mostrar em quais momentos da rotina a criança precisa de apoio de locomoção, higiene, alimentação, interação ou comunicação (áreas do art. 14).',k.estudo?'O estudo de caso já existe: confira se ele descreve essas necessidades com exemplos concretos.':'Faça o estudo de caso antes de levar o pedido à direção.','Leve o pedido à direção e à coordenação da EMEI, que fazem a solicitação junto à SMED.'],
+enc:()=>'Encaminhar à direção da EMEI com o estudo de caso',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Aqui é '+(c.prof||'a professora do AEE')+', da '+(c.emei||'EMEI')+'. Estamos avaliando os apoios que podem ajudar '+primeiro(k.nome)+' na rotina da escola. Gostaria de conversar com vocês sobre isso. Qual o melhor dia?'},
+{id:'nova',t:'Criança nova, ainda sem diagnóstico',base:'O estudo de caso é a etapa inicial de identificação do público da educação especial e não depende de laudo (art. 11, caput e § 7º). Avaliações de saúde são apenas subsidiárias (art. 11, § 6º).',
+an:k=>['Marque o público como "Em observação (sem laudo)".','Observe a criança em vários momentos da rotina antes de concluir.','Converse com a família sobre o desenvolvimento e a rotina em casa, sem falar em diagnóstico.','Se perceber sinais que pedem avaliação de saúde, oriente a família a procurar o centro de saúde, sem condicionar o AEE a isso.'],
+enc:()=>'Iniciar o estudo de caso com observação e conversa com a família',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Aqui é '+(c.prof||'a professora do AEE')+', da '+(c.emei||'EMEI')+'. Faço parte da equipe que acompanha o desenvolvimento das crianças. Gostaria de conhecer melhor '+primeiro(k.nome)+' e saber como é a rotina dela/dele em casa. Podemos conversar esta semana?'},
+{id:'laudo',t:'A família trouxe laudo ou relatório de terapia',base:'O laudo não é exigido, mas a avaliação biopsicossocial pode subsidiar o estudo de caso (art. 11, §§ 6º e 7º). Dados de saúde são sensíveis e seguem a LGPD (art. 12, § 5º).',
+an:k=>['Guarde o documento na pasta da criança na secretaria da EMEI, não em celular pessoal.','No app, registre só o que importa para o trabalho pedagógico.','Use as recomendações dos terapeutas para revisar o PAEE/PEI, mas a decisão pedagógica é da escola.','Se for útil, proponha articulação com os terapeutas, com autorização da família.'],
+enc:()=>'Agradecer, arquivar e revisar o PAEE/PEI',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Recebemos o relatório de '+primeiro(k.nome)+'. Muito obrigada por compartilhar. Vamos usar as orientações no planejamento da escola e, se vocês autorizarem, posso conversar com os profissionais que acompanham '+primeiro(k.nome)+'.'},
+{id:'trans',t:'Transição para o Ensino Fundamental',base:'O AEE deve promover condições para a continuidade dos estudos (art. 6º do Decreto nº 12.686/2025).',
+an:k=>['Gere o relatório da criança em Relatórios e revise com a professora referência.','Com autorização da família, envie à escola de Ensino Fundamental o relatório e o PAEE/PEI.','Se possível, combine uma visita da criança à nova escola e uma conversa com a professora de AEE de lá.','Registre o que funciona melhor para a criança: isso é o que mais ajuda quem a recebe.'],
+enc:()=>'Preparar relatório de transição e articular com a escola de destino',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Aqui é '+(c.prof||'a professora do AEE')+', da '+(c.emei||'EMEI')+'. Estamos preparando a passagem de '+primeiro(k.nome)+' para o Ensino Fundamental. Com a autorização de vocês, quero enviar para a nova escola o relatório e o plano de atendimento, para que ela seja bem recebida. Podemos conversar?'},
+{id:'caa',t:'A criança precisa de comunicação alternativa (CAA)',base:'A Lei nº 13.146/2015, art. 28, XIX (incluído pela Lei nº 15.249/2025), prevê sistemas de CAA de baixa tecnologia no AEE para quem tem necessidades complexas de comunicação.',
+an:k=>['Comece com poucas figuras ligadas aos interesses da criança: '+(k.interesses||'registre os interesses na ficha')+'.','Use a mesma prancha na turma, no lanche e em casa.','Ensine a professora referência e o PAE a oferecer a prancha, esperando a resposta da criança.','Inclua o recurso no PAEE/PEI e registre a evolução nos registros.'],
+enc:()=>'Incluir a CAA no PAEE/PEI e orientar professora, PAE e família',
+msg:(k,c)=>'Olá, '+(k.resp||'família')+'. Aqui é '+(c.prof||'a professora do AEE')+'. Estamos usando com '+primeiro(k.nome)+' uma prancha com figuras para ajudar a comunicar escolhas. Vou mandar uma cópia para usarem em casa também. Quanto mais ela aparece no dia a dia, mais a criança usa. Obrigada!'}];
+function vAssist(){const s=SIT.find(x=>x.id===cur.sit);const k=kidBy(cur.kid)||S.kids[0];
+let out='';if(s&&k){const a=s.an(k,S.cfg),f=S.regs.filter(x=>x.kid===k.id&&x.pres==='Faltou').length,m=s.msg(k,S.cfg),dest=s.dest==='prof'?'':(k.tel||'').replace(/\D/g,'');
+out='<div class="card"><span class="tag t">Encaminhamento sugerido</span><h2 style="margin-top:8px">'+esc(s.enc(f))+'</h2><p class="small mut"><b>Base:</b> '+esc(s.base)+'</p><h3>Análise do caso</h3><ul>'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul><h3>Mensagem pronta'+(s.dest==='prof'?' para a professora referência':' para a família')+'</h3><textarea id="msg">'+esc(m)+'</textarea><div class="row" style="margin-top:10px"><button data-act="copy" data-src="msg">Copiar</button>'+(dest?'<a class="btn sec" id="wa" href="https://wa.me/55'+esc(dest.replace(/^55/,''))+'?text='+encodeURIComponent(m)+'">Abrir no WhatsApp</a><span class="small mut">'+esc(k.tel)+'</span>':(s.dest==='prof'?'':'<span class="small mut">Cadastre o WhatsApp na ficha para abrir direto.</span>'))+'<button class="ter" data-act="regSit">Registrar no histórico</button></div><p class="small mut">A decisão final é sua. Revise a mensagem antes de enviar.</p></div>'}
+return'<h1>Assistente de casos</h1><p class="mut">Escolha a criança e a situação. O assistente analisa o caso com base nos dados registrados e na legislação, sugere o encaminhamento e deixa a mensagem pronta.</p><div class="card"><label for="ak">Criança</label><select id="ak">'+kidOpts(k&&k.id)+'</select><label>Situação</label><div class="list">'+SIT.map(x=>'<button class="'+(x.id===cur.sit?'':'sec')+'" style="justify-content:flex-start;text-align:left" data-act="sit" data-id="'+x.id+'">'+esc(x.t)+'</button>').join('')+'</div></div>'+out}
+/* RELATORIOS */
+function relTexto(k,ini0,fim){const r=S.regs.filter(x=>x.kid===k.id&&x.data>=ini0&&x.data<=fim).sort((a,b)=>a.data.localeCompare(b.data));const pres=r.filter(x=>x.pres==='Presente').length,fal=r.filter(x=>x.pres==='Faltou').length;
+const e=k.estudo||{},p=k.paee||{},n=primeiro(k.nome);const P=[];
+P.push(k.nome+', '+(idade(k.nasc)||'idade não informada')+', frequenta '+(k.turma?'a turma '+k.turma:'o agrupamento '+(k.agr||''))+' da '+(S.cfg.emei||'EMEI')+(k.turno?', no turno '+k.turno.toLowerCase():'')+', e é acompanhada pelo Atendimento Educacional Especializado. Este relatório reúne o acompanhamento realizado entre '+fmt(ini0)+' e '+fmt(fim)+'.');
+if(e.e3p||k.interesses)P.push('No cotidiano da EMEI, '+(e.e3p?'observa-se que '+n+' '+lc(e.e3p)+'.'+(k.interesses?' Demonstra interesse por '+lc(k.interesses)+'.':''):n+' demonstra interesse por '+lc(k.interesses)+'.'));
+if(e.e1||e.e3n)P.push('O estudo de caso'+(e.data?', realizado em '+fmt(e.data)+(e.fam?' com a participação da família':''):'')+', identificou '+[e.e1?lc(e.e1):'',e.e3n?'como necessidade de apoio, '+lc(e.e3n):''].filter(Boolean).join('; ')+'.');
+if(p.data){const ob=CAMPOS.filter(c=>p.obj&&p.obj[c]).map(c=>'no campo '+c+', '+p.obj[c].replace(/\.$/,'').toLowerCase());P.push('O plano de atendimento, elaborado em '+fmt(p.data)+', prevê atendimento '+(p.freq||'')+(p.local?', '+p.local.toLowerCase():'')+(ob.length?', com os seguintes objetivos: '+ob.join('; '):'')+'.'+(p.rec&&p.rec.length?' Os recursos de acessibilidade utilizados são '+p.rec.map(lc).join(', ')+'.':''))}
+if(r.length){P.push('No período foram realizados '+r.length+' registros de acompanhamento, com '+pres+' presença(s)'+(fal?' e '+fal+' falta(s)':'')+'. '+r.filter(x=>x.resp).slice(-4).map(x=>'Em '+fmt(x.data)+', '+x.resp.replace(/\.$/,'').replace(/^./,c=>c.toLowerCase())).join('. ')+(r.some(x=>x.resp)?'.':''))}
+const R=k.rel||{};if(R.marcos&&Object.keys(R.marcos).length){const fx=FAIXAS.find(f=>f[0]===R.faixa)||FAIXAS[1],L=MARCOS[fx[0]];const par=[];
+CAMPOS.forEach((c,ci)=>{const g={a:[],d:[],n:[]};(L[ci]||[]).forEach((it,ii)=>{const v=R.marcos[fx[0]+ci+'_'+ii];if(v)g[v].push(it)});const pt=[];if(g.a.length)pt.push('apresenta como conquistas já adquiridas '+juntar(g.a));if(g.d.length)pt.push((pt.length?'tem em desenvolvimento ':'tem em desenvolvimento ')+juntar(g.d));if(g.n.length)pt.push((pt.length?'e, por enquanto, ':'')+'ainda não demonstra os marcos de '+juntar(g.n));if(pt.length)par.push('No campo '+c+', '+n+' '+pt.join('; ')+'.')});
+if(par.length)P.push('Quanto aos marcos do desenvolvimento, a observação tomou como referência a faixa de '+fx[1].toLowerCase()+' ('+fx[2]+') da BNCC'+(fx[0]!==faixaDe(k)?', escolhida pela professora por se aproximar mais do momento atual de desenvolvimento da criança':'')+'. '+par.join(' '))}
+if((R.barr&&R.barr.length)||(R.rec&&R.rec.length))P.push((R.barr&&R.barr.length?'Ainda se observam barreiras nos seguintes aspectos: '+juntar(R.barr)+'. ':'')+(R.rec&&R.rec.length?(R.barr&&R.barr.length?'Para reduzi-las, ':'No período, ')+'foram utilizados recursos e adaptações como '+juntar(R.rec.map(lc))+'.':''));
+if(R.cons&&R.cons.trim())P.push(R.cons.trim());
+const prox=r.filter(x=>x.prox).slice(-1)[0];P.push('Para a continuidade do trabalho, '+(prox?'propõe-se '+prox.prox.replace(/\.$/,'').replace(/^./,c=>c.toLowerCase()):'propõe-se manter as estratégias do plano')+(p.oprof?', mantendo junto à professora referência a orientação de '+p.oprof.replace(/\.$/,'').replace(/^./,c=>c.toLowerCase()):'')+(p.ofam?' e, com a família, '+p.ofam.replace(/\.$/,'').replace(/^./,c=>c.toLowerCase()):'')+'.');
+return P.join('\n\n').replace(/\s—\s|–/g,', ').replace(/\baluno(s)?\b/gi,'criança')}
+function vRel(){const k=kidBy(cur.kid)||S.kids[0];const y=new Date().getFullYear();const i0=cur.ri||y+'-01-01',f0=cur.rf||hoje();
+if(!k)return'<h1>Relatórios</h1><p class="mut">Cadastre uma criança primeiro.</p>';
+const R=k.rel||{};const fx=cur.fx||R.faixa||faixaDe(k);const L=MARCOS[fx];const mk=R.marcos||{};const nm=Object.keys(mk).filter(x=>x.startsWith(fx)).length;
+const recDef=R.rec||(k.paee&&k.paee.rec)||[];
+return'<h1>Relatórios</h1><div class="card"><div class="f2"><div><label for="rk">Criança</label><select id="rk">'+kidOpts(k.id)+'</select></div><div><label for="ri">De</label><input type="date" id="ri" value="'+i0+'"></div><div><label for="rf">Até</label><input type="date" id="rf" value="'+f0+'"></div></div></div>'+
+'<form class="card" id="fm"><h2>Marcos do desenvolvimento</h2><p class="small mut">Marque o que já foi observado em cada campo de experiência. A faixa indicada pela idade é '+FAIXAS.find(f=>f[0]===faixaDe(k))[1].toLowerCase()+'. Se o desenvolvimento da criança estiver mais próximo de outra faixa, troque aqui. Deixe sem marcar o que não se aplica.</p>'+
+'<div class="tabs">'+FAIXAS.map(f=>'<button type="button" class="'+(f[0]===fx?'':'sec')+'" data-act="fx" data-f="'+f[0]+'">'+f[1]+'</button>').join('')+'</div><p class="small mut">'+FAIXAS.find(f=>f[0]===fx)[2]+' · '+nm+' marco(s) marcado(s) nesta faixa</p>'+
+CAMPOS.map((c,ci)=>{const its=L[ci]||[];const q=its.filter((_,ii)=>mk[fx+ci+'_'+ii]).length;return'<details'+(ci===0||q?' open':'')+'><summary>'+c+' <span class="tag a">'+q+'/'+its.length+'</span></summary>'+its.map((it,ii)=>{const id=fx+ci+'_'+ii,v=mk[id]||'';return'<div class="mk"><span>'+esc(it.replace(/^./,ch=>ch.toUpperCase()))+'</span><div class="seg" role="radiogroup" aria-label="'+esc(it)+'">'+ST.map(([sv,sl])=>'<label class="'+sv+'"><input type="radio" name="mk_'+id+'" value="'+sv+'"'+(v===sv?' checked':'')+'><span>'+sl+'</span></label>').join('')+'<button type="button" class="ghost small" style="min-height:32px;padding:4px 10px" data-act="limpaMk" data-id="'+id+'" aria-label="Limpar">Limpar</button></div></div>'}).join('')+'</details>'}).join('')+
+'<h3 style="margin-top:16px">Barreiras ainda observadas</h3>'+chks('barr',BARR,R.barr)+
+'<h3 style="margin-top:16px">Recursos e adaptações utilizados</h3><p class="small mut">Já vem marcado com o que está no PAEE/PEI.</p>'+chks('rec',REC,recDef)+
+ta('cons','Consideração pessoal da professora (entra no texto do relatório)',R.cons)+
+'<div class="row" style="margin-top:16px"><button type="submit" class="sec">Salvar marcações</button><button type="button" data-act="gerRel">Gerar relatório</button></div></form>'+
+(cur.rel!=null?'<div class="card" id="relcard"><h2>Relatório de acompanhamento</h2><p class="small mut">Texto corrido gerado a partir do estudo de caso, do PAEE/PEI, dos registros e dos marcos marcados. Revise e complete antes de assinar.</p><textarea id="reltxt" style="min-height:420px">'+esc(cur.rel)+'</textarea><div class="row" style="margin-top:10px"><button data-act="copy" data-src="reltxt">Copiar</button><button class="sec" data-act="baixar">Baixar para o Word</button></div></div>':'')}
+function salvaMarcos(){const f=$('#fm'),k=kidBy(cur.kid)||S.kids[0];if(!f||!k)return;cur.kid=k.id;const d=fdata(f),R=k.rel||{marcos:{}};const fx=cur.fx||R.faixa||faixaDe(k);
+R.marcos=R.marcos||{};Object.keys(R.marcos).forEach(x=>{if(x.startsWith(fx))delete R.marcos[x]});Object.keys(d).forEach(x=>{if(x.startsWith('mk_'))R.marcos[x.slice(3)]=d[x]});R.faixa=fx;R.barr=arr(d.barr);R.rec=arr(d.rec);R.cons=d.cons||'';R.data=hoje();k.rel=R;save()}
+/* LEGISLACAO */
+const LEI=[['Federal',[
+['Constituição Federal, art. 208, III','Garante o atendimento educacional especializado, preferencialmente na rede regular de ensino.','https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm'],
+['LDB, Lei nº 9.394/1996, arts. 58 a 60','Define a educação especial como modalidade e garante sua oferta desde a educação infantil.','https://www.planalto.gov.br/ccivil_03/leis/l9394.htm'],
+['Lei Brasileira de Inclusão, Lei nº 13.146/2015, arts. 27 e 28','Sistema educacional inclusivo, plano de AEE, estudo de caso e tecnologia assistiva. O inciso XIX do art. 28, incluído pela Lei nº 15.249/2025, prevê CAA de baixa tecnologia no AEE.','https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm'],
+['Lei nº 12.764/2012 (Lei Berenice Piana)','A pessoa com TEA é considerada pessoa com deficiência para todos os efeitos legais.','https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12764.htm'],
+['Decreto nº 12.686/2025, alterado pelo Decreto nº 12.773/2025','Nova Política Nacional de Educação Especial Inclusiva. Revogou o Decreto nº 7.611/2011. AEE complementar (deficiência e TEA) ou suplementar (altas habilidades), que não substitui a classe comum (art. 8º). Estudo de caso em quatro etapas (art. 11), sem exigência de laudo (art. 11, § 7º). PAEE e PEI obrigatórios, de atualização contínua, no PPP da escola (art. 12). Professor de AEE com formação continuada mínima de 360 horas (art. 13). PAE atua conforme o PAEE/PEI, também sem exigência de laudo (art. 14).','https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/D12686.htm'],
+['Resolução CNE/CEB nº 4/2009','Diretrizes Operacionais do AEE. O art. 13 lista as atribuições do professor de AEE: produzir recursos, elaborar e executar o plano de AEE, organizar os atendimentos, acompanhar o uso dos recursos na turma, articular com a saúde e a assistência social, orientar professores e famílias, ensinar tecnologia assistiva e articular com a sala comum.','https://www.normasbrasil.com.br/norma/resolucao-4-2009_111425.html'],
+['Resolução CNE/CEB nº 5/2009 (DCNEI)','Diretrizes Curriculares Nacionais para a Educação Infantil: interações e brincadeira como eixos do currículo.','http://portal.mec.gov.br/dmdocuments/rceb005_09.pdf'],
+['BNCC, Educação Infantil','Direitos de aprendizagem e cinco campos de experiência, usados no PAEE/PEI deste app.','http://basenacionalcomum.mec.gov.br/'],
+['LGPD, Lei nº 13.709/2018','Dados de saúde de crianças são sensíveis. O Decreto nº 12.686/2025 exige que o PAEE/PEI observe a LGPD (art. 12, § 5º).','https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm']]],
+['Belo Horizonte',[
+['Portaria SMED nº 112/2009','Norma municipal que fixa a organização e o funcionamento do AEE na RME-BH, citada pela Câmara Municipal em 2025. É anterior ao Decreto nº 12.686/2025: confirme na SMED se há atualização.',''],
+['Universalização do AEE (SMED, 2025)','Desde 1º de maio de 2025 o AEE alcança todas as crianças e estudantes com deficiência, TEA e altas habilidades da rede, inclusive as EMEIs, com atendimento dentro de cada escola e não mais apenas em escolas-polo.','https://prefeitura.pbh.gov.br/noticias/politica-municipal-de-educacao-inclusiva'],
+['Nota Técnica DEID/SMED nº 40/2024','Critérios para definir se o apoio escolar é compartilhado ou exclusivo, conforme a deficiência e a autonomia da criança.',''],
+['Lei nº 10.788/2014','Diretrizes municipais para a inclusão educacional de pessoas com deficiência, TGD e altas habilidades.',''],
+['Lei nº 10.418/2012 e Decreto nº 15.519/2014','Reconhecem a pessoa com autismo como pessoa com deficiência nos direitos municipais.',''],
+['Lei nº 11.416/2022','Lei Municipal de Inclusão da Pessoa com Deficiência e com Mobilidade Reduzida.',''],
+['Plano Municipal de Educação, Lei nº 10.917/2016, Meta 4','Metas de educação inclusiva da cidade.',''],
+['Proposições Curriculares da Educação Infantil da RME-BH','Referência curricular da rede para o trabalho nas EMEIs.','']]]];
+function vLei(){return'<h1>Legislação do AEE</h1><p class="mut">Levantamento de novembro de 2026. Resumos em linguagem simples: consulte sempre o texto oficial.</p><div class="warnb">Atenção: o Decreto nº 7.611/2011, muito citado em documentos antigos, foi revogado pelo Decreto nº 12.686/2025.</div>'+
+LEI.map(([g,l])=>'<div class="card"><h2>'+g+'</h2>'+l.map(([t,d,u])=>'<div class="lei"><b>'+esc(t)+'</b><span>'+esc(d)+'</span>'+(u?' <a href="'+esc(u)+'">Texto oficial</a>':'')+'</div>').join('')+'</div>').join('')+
+'<div class="card"><h2>Na prática da EMEI</h2><ul><li>O AEE na Educação Infantil acontece na rotina: acolhida, roda, alimentação, higiene, sono e brincadeira são momentos de observação e intervenção.</li><li>Nas EMEIs de horário integral não há contraturno: o atendimento colaborativo na turma ganha peso.</li><li>Criança sem diagnóstico não fica sem AEE: o estudo de caso é o caminho.</li><li>O plano é pedagógico: relatórios de saúde ajudam, mas não decidem pela escola.</li></ul></div>'}
+/* AJUSTES */
+function vCfg(){const c=S.cfg;return'<h1>Ajustes</h1><form class="card" id="fc"><h2>Seus dados</h2><div class="f2">'+inp('prof','Seu nome',c.prof)+inp('emei','Nome da EMEI',c.emei)+inp('regional','Diretoria Regional',c.regional)+inp('pin','PIN de 4 dígitos para abrir o app (opcional)',c.pin,'password')+'</div><p class="small mut">O PIN só evita que outra pessoa abra o app por acaso no seu aparelho.</p><button style="margin-top:10px">Salvar</button></form>'+
+instCard()+'<div class="card"><h2>Onde ficam os dados</h2><p>Tudo fica guardado só neste navegador, neste aparelho. Nada vai para servidor, nem para o Pedro. Por isso, faça backup com frequência: se limpar o navegador ou trocar de aparelho, os dados se perdem.</p><div class="row"><button data-act="backup">Fazer backup</button><button class="sec" data-act="copyBk">Copiar backup</button><label class="btn sec" style="margin:0">Restaurar backup<input type="file" id="restore" accept=".json,application/json" hidden></label></div></div>'+
+'<div class="card"><h2>Limpeza</h2><div class="row">'+(S.kids.some(k=>k.ex)?'<button class="ter" data-act="semEx">Remover os exemplos</button>':'')+'<button class="del" data-act="apagar">Apagar todos os dados</button></div><div id="conf"></div></div>'}
+function instCard(){const st=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone;if(st)return'<div class="card"><h2>App instalado</h2><p>O Ciranda AEE está instalado neste aparelho e funciona mesmo sem internet.</p></div>';
+const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+return'<div class="card"><h2>Instalar no celular ou computador</h2>'+(instEv?'<button data-act="instalar">Instalar o Ciranda AEE</button>':ios?'<ol><li>Abra este endereço no Safari.</li><li>Toque no botão Compartilhar (o quadrado com a seta para cima).</li><li>Toque em Adicionar à Tela de Início.</li><li>Toque em Adicionar.</li></ol>':'<ol><li>Abra este endereço no Chrome.</li><li>Toque nos três pontinhos no canto de cima, à direita.</li><li>Toque em Instalar app (ou Adicionar à tela inicial).</li><li>Confirme em Instalar.</li></ol>')+'<p class="small mut">Depois de instalado, o app abre pelo ícone e funciona sem internet.</p></div>'}
+let instEv=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();instEv=e;if(cur.v==='ajustes'||cur.v==='hoje')render()});
+window.addEventListener('appinstalled',()=>{instEv=null;toast('App instalado');render()});
+/* ACTIONS */
+function fdata(f){const o={},fd=new FormData(f);for(const[k,v]of fd.entries()){if(o[k]!==undefined){o[k]=[].concat(o[k],v)}else o[k]=v}return o}
+const arr=v=>v==null?[]:[].concat(v);
+function confirmBox(msg,cb){const d=$('#conf')||$('#main');const w=document.createElement('div');w.className='warnb';w.innerHTML=esc(msg)+'<div class="row" style="margin-top:8px"><button class="ter" id="cy">Confirmar</button><button class="ghost" id="cn">Cancelar</button></div>';d.prepend(w);w.querySelector('#cy').onclick=()=>{cb();w.remove()};w.querySelector('#cn').onclick=()=>w.remove();w.scrollIntoView({block:'center'})}
+async function baixar(nome,conteudo,tipo){if(!dl){try{const u=URL.createObjectURL(new Blob([conteudo],{type:tipo})),a=document.createElement('a');a.href=u;a.download=nome;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('Arquivo baixado');return}catch(e){}}if(dl){try{await dl.save({filename:nome,data:new Blob([conteudo],{type:tipo})});toast('Arquivo salvo');return}catch(e){}}try{await navigator.clipboard.writeText(conteudo);toast('Download indisponível aqui. Conteúdo copiado.')}catch(e){toast('Não foi possível baixar. Use Copiar.')}}
+function docHTML(titulo,corpo,lista){const c=S.cfg;return'<html><head><meta charset="utf-8"><style>body{font-family:Calibri,Arial;font-size:12pt;margin:2cm}p{text-align:justify}.h{text-align:center;font-weight:bold;margin:0}</style></head><body><p class="h">PREFEITURA MUNICIPAL DE BELO HORIZONTE</p><p class="h">SECRETARIA MUNICIPAL DE EDUCAÇÃO (SMED-BH)</p>'+(c.regional?'<p class="h">'+esc(c.regional.toUpperCase())+'</p>':'')+'<p class="h">'+esc((c.emei||'EMEI').toUpperCase())+'</p><p class="h" style="margin-top:18px">'+esc(titulo)+'</p>'+corpo+'<p style="margin-top:36px">'+esc(c.prof||'')+'<br>Professora do Atendimento Educacional Especializado</p></body></html>'}
+function paeeTexto(k){const p=k.paee,e=k.estudo||{};const L=[];L.push('PAEE/PEI de '+k.nome);L.push('- Data de nascimento: '+fmt(k.nasc)+' ('+idade(k.nasc)+')');L.push('- Turma: '+(k.turma||k.agr||'')+(k.turno?', turno '+k.turno:''));L.push('- Professora referência: '+(k.refp||''));L.push('- Elaborado em: '+fmt(p.data)+(p.rev?' | Revisão prevista: '+fmt(p.rev):''));
+L.push('','Base do estudo de caso');if(e.e3p)L.push('- Potencialidades: '+e.e3p);if(e.e3n)L.push('- Necessidades de apoio: '+e.e3n);
+L.push('','Organização do atendimento');L.push('- Frequência: '+(p.freq||''));L.push('- Duração: '+(p.dur||''));L.push('- Local: '+(p.local||''));
+L.push('','Objetivos por campo de experiência');CAMPOS.forEach(c=>{if(p.obj&&p.obj[c])L.push('- '+c+': '+p.obj[c])});
+if(p.rec&&p.rec.length){L.push('','Recursos de acessibilidade');p.rec.forEach(r=>L.push('- '+r))}
+[['oprof','Orientações à professora referência'],['opae','Orientações ao PAE'],['ofam','Combinados com a família'],['inter','Articulação intersetorial']].forEach(([a,t])=>{if(p[a])L.push('',t,'- '+p[a])});return L.join('\n')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,id=b.dataset.id;
+if(a==='go')go(b.dataset.v);
+else if(a==='openKid'){cur.kid=id;cur.tab='ficha';go('criancas')}
+else if(a==='pend'){cur.kid=id;if(b.dataset.go==='reg'){go('registros')}else if(b.dataset.go==='assist'){cur.sit='falta';go('assistente')}else{cur.tab=b.dataset.go;go('criancas')}}
+else if(a==='voltar'){cur.kid=null;render()}
+else if(a==='tab'){cur.tab=b.dataset.t;render()}
+else if(a==='novaKid'){const k={id:uid(),nome:'Nova criança',horarios:[],pub:[],estudo:null,paee:null};S.kids.push(k);save();cur.kid=k.id;cur.tab='ficha';render()}
+else if(a==='delKid')confirmBox('Excluir esta criança e todos os registros dela?',()=>{S.kids=S.kids.filter(k=>k.id!==id);S.regs=S.regs.filter(r=>r.kid!==id);save();cur.kid=null;render();toast('Criança excluída')});
+else if(a==='addHr'){const h=$('#hrs');h.insertAdjacentHTML('beforeend',hrRow({},h.children.length))}
+else if(a==='novoReg'){if(!S.kids.length){toast('Cadastre uma criança primeiro');return}if(id)cur.kid=id;go('registros')}
+else if(a==='delReg')confirmBox('Excluir este registro?',()=>{S.regs=S.regs.filter(r=>r.id!==id);save();render()});
+else if(a==='sit'){cur.sit=id;cur.kid=$('#ak').value;render();setTimeout(()=>{const m=$('#msg');m&&m.scrollIntoView({behavior:'smooth',block:'center'})},50)}
+else if(a==='copy'){const t=$('#'+b.dataset.src);navigator.clipboard.writeText(t.value).then(()=>toast('Copiado'),()=>{t.select();toast('Selecionado: use Ctrl+C')})}
+else if(a==='regSit'){const s=SIT.find(x=>x.id===cur.sit);S.regs.push({id:uid(),kid:cur.kid,data:hoje(),tipo:s.dest==='prof'?'Orientação à professora referência':'Atendimento ou contato com a família',pres:'Não se aplica',prop:s.t+'. '+s.enc(0)+'. Mensagem preparada: '+$('#msg').value,resp:'',prox:''});save();toast('Registrado no histórico')}
+else if(a==='docPaee'){const k=kidBy(cur.kid);if(!k.paee){toast('Salve o PAEE/PEI primeiro');return}const t=paeeTexto(k);$('#docout').innerHTML='<div class="card"><h2>Documento do PAEE/PEI</h2><textarea id="ptxt" style="min-height:320px">'+esc(t)+'</textarea><div class="row" style="margin-top:10px"><button data-act="copy" data-src="ptxt">Copiar</button><button class="sec" data-act="baixarP">Baixar para o Word</button></div></div>';$('#docout').scrollIntoView({behavior:'smooth'})}
+else if(a==='baixarP'){const k=kidBy(cur.kid),t=$('#ptxt').value;const corpo=t.split('\n').map(l=>l.startsWith('- ')?'<p style="margin:2px 0 2px 18px">&bull; '+esc(l.slice(2))+'</p>':l?'<p><b>'+esc(l)+'</b></p>':'').join('');baixar('PAEE-PEI '+k.nome+'.doc',docHTML('PLANO DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO E PLANO EDUCACIONAL INDIVIDUALIZADO',corpo),'application/msword')}
+else if(a==='fx'){salvaMarcos();const k=kidBy(cur.kid);cur.fx=b.dataset.f;if(k&&k.rel){k.rel.faixa=cur.fx;save()}render()}
+else if(a==='limpaMk'){document.querySelectorAll('[name="mk_'+id+'"]').forEach(r=>r.checked=false)}
+else if(a==='gerRel'){const k=kidBy($('#rk').value);if(!k)return;cur.kid=k.id;salvaMarcos();cur.ri=$('#ri').value;cur.rf=$('#rf').value;cur.rel=relTexto(k,cur.ri,cur.rf);render();setTimeout(()=>{const c=$('#relcard');c&&c.scrollIntoView({behavior:'smooth'})},50)}
+else if(a==='baixar'){const k=kidBy(cur.kid),t=$('#reltxt').value;baixar('Relatório AEE '+k.nome+'.doc',docHTML('RELATÓRIO DE ACOMPANHAMENTO DO ATENDIMENTO EDUCACIONAL ESPECIALIZADO',t.split(/\n\s*\n/).map(p=>'<p>'+esc(p)+'</p>').join('')),'application/msword')}
+else if(a==='instalar'){if(instEv){instEv.prompt();instEv.userChoice.finally(()=>{instEv=null;render()})}}
+else if(a==='backup')baixar('ciranda-aee-backup-'+hoje()+'.json',JSON.stringify(S),'application/json');
+else if(a==='copyBk')navigator.clipboard.writeText(JSON.stringify(S)).then(()=>toast('Backup copiado. Cole num lugar seguro.'),()=>toast('Não foi possível copiar'));
+else if(a==='semEx'){const ids=S.kids.filter(k=>k.ex).map(k=>k.id);S.kids=S.kids.filter(k=>!k.ex);S.regs=S.regs.filter(r=>!ids.includes(r.kid));save();render();toast('Exemplos removidos')}
+else if(a==='apagar')confirmBox('Apagar todas as crianças, registros e ajustes deste aparelho? Faça backup antes.',()=>{S={cfg:{},kids:[],regs:[]};save();render();toast('Dados apagados')});
+});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target,d=fdata(f);
+if(f.id==='fk'){const k=kidBy(cur.kid);const hs=[];f.querySelectorAll('.hr').forEach((r,i)=>{const di=r.querySelector('select[name^=hd]').value,ho=r.querySelector('input[name^=hh]').value,mo=r.querySelector('select[name^=hm]').value;if(di&&ho)hs.push({dia:di,hora:ho,modo:mo||'Sala de recursos'})});
+Object.assign(k,{nome:d.nome||'Sem nome',nasc:d.nasc,agr:d.agr,turma:d.turma,turno:d.turno,refp:d.refp,resp:d.resp,tel:d.tel,pae:d.pae,pub:arr(d.pub),interesses:d.interesses,saude:d.saude,horarios:hs});delete k.ex;save();render();toast('Ficha salva')}
+else if(f.id==='fe'){const k=kidBy(cur.kid);const m={};MOM.forEach((x,i)=>{if(d['m'+i])m[x]=d['m'+i]});k.estudo={data:d.data,fam:!!d.fam,e1:d.e1,m,e3p:d.e3p,e3n:d.e3n,e4:d.e4,rec:arr(d.rec)};save();render();toast('Estudo de caso salvo')}
+else if(f.id==='fp'){const k=kidBy(cur.kid);const o={};CAMPOS.forEach((c,i)=>{if(d['o'+i])o[c]=d['o'+i]});k.paee={data:d.data,rev:d.rev,freq:d.freq,dur:d.dur,local:d.local,obj:o,rec:arr(d.rec),oprof:d.oprof,opae:d.opae,ofam:d.ofam,inter:d.inter};save();render();toast('PAEE/PEI salvo')}
+else if(f.id==='fr'){if(!d.kid){toast('Escolha a criança');return}S.regs.push({id:uid(),kid:d.kid,data:d.data,tipo:d.tipo,pres:d.pres,prop:d.prop,resp:d.resp,prox:d.prox});cur.kid=d.kid;save();render();toast('Registro salvo')}
+else if(f.id==='fm'){salvaMarcos();render();toast('Marcações salvas')}
+else if(f.id==='fc'){if(d.pin&&!/^\d{4}$/.test(d.pin)){toast('O PIN deve ter 4 números');return}S.cfg={prof:d.prof,emei:d.emei,regional:d.regional,pin:d.pin};save();render();toast('Ajustes salvos')}});
+document.addEventListener('input',e=>{if(e.target.id==='busca')$('#klist').innerHTML=kidCards(e.target.value)});
+document.addEventListener('change',e=>{if(e.target.id==='rk'){cur.kid=e.target.value;cur.fx=null;cur.rel=null;render();return}
+if(e.target.id==='ri')cur.ri=e.target.value;if(e.target.id==='rf')cur.rf=e.target.value;
+if(e.target.id==='ak'){cur.kid=e.target.value;if(cur.sit)render()}
+if(e.target.id==='restore'){const f=e.target.files[0];if(!f)return;f.text().then(t=>{const o=JSON.parse(t);if(!o.kids||!o.regs)throw 0;S=o;save();render();toast('Backup restaurado')}).catch(()=>toast('Arquivo de backup inválido'))}});
+function lock(){if(!S.cfg.pin)return;$('#lockwrap').innerHTML='<div class="lock"><form class="card" id="fl"><h2>Ciranda AEE</h2><label for="lp">Digite seu PIN</label><input id="lp" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><button style="margin-top:12px;width:100%;justify-content:center">Entrar</button></form></div>';
+$('#fl').addEventListener('submit',ev=>{ev.preventDefault();ev.stopPropagation();if($('#lp').value===S.cfg.pin)$('#lockwrap').innerHTML='';else toast('PIN incorreto')},true);setTimeout(()=>$('#lp').focus(),50)}
+function fromHash(){const h=location.hash.slice(1);if(VIEWS.some(v=>v[0]===h)){if(h!==cur.v){cur.v=h;if(h==='criancas')cur.kid=null;render()}}}
+window.addEventListener('hashchange',fromHash);
+load();const h0=location.hash.slice(1);if(VIEWS.some(v=>v[0]===h0))cur.v=h0;render();lock();
+if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+if(window.claude&&window.claude.use)window.claude.use('downloads').then(d=>{dl=d}).catch(()=>{});
+}
+</script>
+</body>
+</html>

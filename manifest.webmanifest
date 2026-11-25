@@ -1,0 +1,17 @@
+{
+  "name": "Ciranda AEE",
+  "short_name": "Ciranda AEE",
+  "description": "Caderno de trabalho da professora de AEE da Educação Infantil",
+  "lang": "pt-BR",
+  "start_url": "./#hoje",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6efe3",
+  "theme_color": "#1f5a66",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
